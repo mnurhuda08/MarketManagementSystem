@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WEBAPP.Models;
 
 namespace WEBAPP.Controllers
 {
@@ -6,19 +7,19 @@ namespace WEBAPP.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var categories = CategoriesRepository.GetCategories();
+            return View(categories);
         }
 
         public IActionResult Edit(int? id)
         {
-            if (id.HasValue) { 
-            return new ContentResult { Content = id.ToString() };
-            }
-            else
+            /*var category = new Category { CategoryId = id.HasValue ? id.Value : 0 };*/
+            if (id == null)
             {
-            return new ContentResult { Content = "ID Not Found" };
-
+                return NotFound();
             }
+            var category = CategoriesRepository.GetCategoryById(id.HasValue ? id.Value : 0);
+            return View("Edit", category);
         }
     }
 }
