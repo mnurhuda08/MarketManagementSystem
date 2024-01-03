@@ -8,6 +8,9 @@
     <div class="card p-3 text-bg-dark">
         <h2>List Category</h2>
         <hr />
+        <div class="card-header text-end">
+            <a class="btn btn-info" asp-controller="Categories" asp-action="Create"><i class="bi bi-plus-circle"></i> &nbsp Add Category</a>
+        </div>
         <div class="card-body">
             @if (Model != null && Model.Count() > 0)
             {
@@ -27,7 +30,7 @@
                                 <td>@category.Description</td>
                                 <td>
                                     <a class="btn btn-outline-light me-2" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.CategoryId" ><i class="bi bi-pencil-square"></i></a>
-                                    <a class="btn btn-md btn-outline-danger" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.CategoryId" role="button"><i class="bi bi-trash"></i></a>
+                                    <a class="btn btn-md btn-outline-danger" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.CategoryId" role="button" onclick="return confirmDelete()"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                         }
@@ -37,3 +40,11 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+        function confirmDelete(){
+            return confirm("Are you sure to delete this category?");
+        }
+    </script>
+}

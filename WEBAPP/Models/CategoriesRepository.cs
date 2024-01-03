@@ -43,7 +43,7 @@
             {
                 return;
             }
-            var categoryToUpdate = GetCategoryById(categoryId);
+            var categoryToUpdate = _categories.FirstOrDefault(c => c.CategoryId == categoryId);
             if (categoryToUpdate != null)
             {
                 categoryToUpdate.Name = category.Name;
